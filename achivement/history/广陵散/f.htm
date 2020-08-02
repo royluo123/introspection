@@ -1,0 +1,1332 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><!--STATUS OK--><html><head> <meta http-equiv="content-type" content="text/html; charset=gbk"> <meta http-equiv="X-UA-Compatible" content="IE=7">
+<title>百度_嵇康吧_[转帖]夜乐之月&lt;关于嵇康和长乐亭主&gt;作者：徐若樱      </title>
+<link rel="shortcut icon" href="http://static.tieba.baidu.com/tb/favicon.ico" />
+<link href="http://static.tieba.baidu.com/tb/style/pb_old.css?v=20090811112651" rel="stylesheet" type="text/css" />
+<script language="javascript" src="http://static.tieba.baidu.com/tb/js/player.js?v=1.1.js"></script>
+<script src="http://static.tieba.baidu.com/static/tb/js/base.js?v=20090811112651" type="text/javascript"></script>
+<script src="http://static.tieba.baidu.com/tb/js/Fe.js?v=20090811112651" type="text/javascript"></script>
+<script src="http://static.tieba.baidu.com/tb/js/pb.js?v=20090811112651" type="text/javascript"></script>
+<script src="http://static.tieba.baidu.com/tb/js/webIM.js?v=20090811112651" type="text/javascript"></script>
+<script>
+ 
+ 
+var need_verify=0;
+var antiAnswer= function(){
+	var vcodeUrl="";
+	var answer={
+		antiNeedVerify:null,
+		antiNeedVerifyA:null
+	};
+	var hasKnowAnti=-1;
+	return {
+		ifHasKnowAnti:function(type){
+			switch(type){
+				case 1:
+				return !(answer.antiNeedVerifyA==null);
+				break;
+				case 0:
+				default:
+				return !(answer.antiNeedVerify==null);
+			}
+		},
+		setVcodeUrl:function(url){
+			vcodeUrl=url;			
+		},
+		getVcodeUrl:function (){
+			return vcodeUrl;
+		},
+		getAntiAnswer:function (anony){
+			if(anony){	
+			    var url="/f?ct=486539264&rs10=2&rs1=1&cm=59201&lm=387494&word=%EF%FA%BF%B5&tn=antiAnswerJson" + "&t="+ Math.random();
+				var xmlhttp = Ajax.getTransport();
+				xmlhttp.open("GET", url, false); //同步调用
+				xmlhttp.send(null);
+				var rst = eval('(' + xmlhttp.responseText + ')');
+				answer.antiNeedVerifyA=rst.nbdAntiNeedVerify;
+				this.setVcodeUrl(rst.vcodeUrl);
+			}
+			else{
+			   var url="/f?ct=486539264&rs10=2&rs1=0&cm=59201&lm=387494&word=%EF%FA%BF%B5&tn=antiAnswerJson" + "&t="+ Math.random();
+				var xmlhttp = Ajax.getTransport();
+				xmlhttp.open("GET", url, false); //同步调用
+				xmlhttp.send(null);
+				var rst = eval('(' + xmlhttp.responseText + ')');
+				answer.antiNeedVerify=rst.nbdAntiNeedVerify;
+				this.setVcodeUrl(rst.vcodeUrl);
+			}
+		},
+		antiProcess:function(){
+		var anony=0;
+	    			var needVerify="";
+			if (!this.ifHasKnowAnti(anony)){
+				this.getAntiAnswer(anony);								
+			}
+			if (anony) 
+			{
+				var needVerify = answer.antiNeedVerifyA;
+			}
+			else 
+			{
+				var needVerify = answer.antiNeedVerify;
+			}
+					if(needVerify=="1") {
+				PageData["need_captcha"]=1;
+			}
+			else{
+				PageData["need_captcha"]=0;
+			}
+					return true;
+		}
+	};	
+}();
+</script>
+<script type="text/javascript">
+/************ Begin 初始化页面    ***************/
+var PageData={ //保存页面中用到的数据
+	curr_href:escape(window.location.href),//当前页url，href的形式，目前仅用在投票的 bu参数
+	is_login:parseInt("0"),
+	can_post:parseInt("1"),//是否可发贴
+	can_anonym_post:parseInt("1"),//是否可匿名发贴
+	forum_id:"387494",//吧id
+	forum_name_u:"%EF%FA%BF%B5",//吧名，添加好友时用于请求用户是否登录
+	forum_url:"/f?kw=%EF%FA%BF%B5",//吧url
+	user_name:"",//登录用户名
+	pdc_friend_sign:"5cb7b3e9ccebd7d01400,5cb7b3e9ccebd7d01400,5cb7b3e9ccebd7d01400,5cb7b3e9ccebd7d01400,5cb7b3e9ccebd7d01400,5cb7b3e9ccebd7d01400,f820d0a1b1c8bae92900,5cb7b3e9ccebd7d01400,c081d3c4c1f7b6c1cae9ee00,f6c0c9bdd1f3d3f34e00,5cb7b3e9ccebd7d01400,f6c0c9bdd1f3d3f34e00,5cb7b3e9ccebd7d01400",//获取好友和PDC数据的加密串
+	total_post_num:parseInt("15"),//主题包含的贴子总数
+	thread_url:"/f?kz=560524883",
+	thread_cur_url:"/f?ct=335544320&lm=0&rn=30&tn=baiduPostBrowser&sc=0&z=560524883&pn=0&word=%EF%FA%BF%B5",//当前页的真实url
+	curr_page_num:parseInt("1"),//当前页
+	all_page_num:parseInt("1"),//总页数
+	need_captcha:0,//初始为0
+	title_max_length:63 //标题的最大长度
+};
+
+document.domain="baidu.com";
+
+var g_pg = {imageLimite: 1,
+flashWhiteList:["http://www.tudou.com/v/","http://www.tudou.com/player/playlist.swf?lid=","http://6.cn/","http://player.ku6.com/refer/","http://img.ku6.com/common/V2.0.baidu.swf?vid=","http://tv.mofile.com/cn/xplayer.swf?v=","http://v.blog.sohu.com/fo/v4/","http://v.blog.sohu.com/fo/p4/","http://vhead.blog.sina.com.cn/player/outer_player.swf?","http://img.openv.tv/hd/swf/hd_player.swf?pid=","http://www.cnboo.com/flash/player.swf?ids=","http://video.pomoho.com/swf/out_player.swf?flvid=","http://video.cctv.com/flash/cctv_player.swf?VideoID=","http://misc.home.news.cn/video/swf/VideoDisplay.swf?videoSource=","http://mv.baidu.com/export/flashplayer.swf?playlist=","http://mv.baidu.com/export/flashplayer.swf?vid=","http://client.joy.cn/flvplayer/"],
+flashLimite: 1,smileyLimite: 10};//富编辑器使用
+
+Page.init=function(){
+	Page.resetChangedSizeImage();
+};
+/************ End 初始化页面    ***************/
+</script>
+</head>
+
+<body onload="Page.init();">
+<a name="pgTop"></a>
+<div style="display:none"><ct>[转帖]夜乐之月&lt;关于嵇康和长乐亭主&gt;作者：徐若樱</ct></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+						
+
+<script src="http://static.tieba.baidu.com/tb/js/conf.js?v=20090811112651" type="text/javascript"></script>
+<script src="http://static.tieba.baidu.com/tb/js/headpage.js?v=20090811112651" type="text/javascript"></script>
+
+<script language="javascript">
+login_str="http://passport.baidu.com/?login&tpl=tb&u="+ForHeader.escapeUTF8(window.location.href)+"&aid=6";
+res_str="http://passport.baidu.com/?reg&tpl=tb&u="+ForHeader.escapeUTF8(window.location.href)+"&aid=6";
+lo_str="http://passport.baidu.com/?logout&aid=6&sid=&u="+ForHeader.escapeUTF8(window.location.href);
+</script>	
+<link href="http://static.tieba.baidu.com/tb/style/headpage.css?v=20090811112651" rel="stylesheet" type="text/css" />
+
+<!--登录条-->
+<div id="usrbar" class="usrbar" style="margin-top:0px; width:100%; padding-right:10px;font-size:12px;height:19px;margin-bottom:4px;line-height:19px;font-family:Arial;text-align:right">
+	<ul id="tbUserBar">
+	
+	
+		
+		<script>
+	document.write("<li><a href=\"http://www.baidu.com/\" >百度首页</a>&nbsp;|&nbsp;</li>");
+	document.write("<li><a href=\"http://passport.baidu.com/?login&tpl=tb&u="+ForHeader.escapeUTF8(window.location.href)+"\">登录</a></li>");
+	</script>
+		</ul>
+</div>
+
+<!--我的贴吧-->
+<div class="loginTip" id="my_forum_tip" style="display:none;">
+<div class="top" style="line-height:normal" name="pop" onmouseover="G_HIBAR.click(event,'forum',true);" onmouseout="G_HIBAR.click(event,'forum',false);"><a href="/f?ct=486539264&cm=58580&tn=bdUserCenter&rs1=1#4">我的贴吧</a>&nbsp;<img src="http://static.tieba.baidu.com/tb/img/login/icon.gif" class="down-arrow-hover" align="absmiddle"></div>
+<div id="myForumList" style="line-height:normal" class="body" name="pop" onmouseover="G_HIBAR.click(event,'forum',true);" onmouseout="G_HIBAR.click(event,'forum',false);">
+</div>
+</div>
+
+<!--我的俱乐部-->
+<div class="loginTip" id="my_club_tip" style="display:none;">
+<div class="top" style="line-height:normal" onmouseover="G_HIBAR.click(event,'club',true);" onmouseout="G_HIBAR.click(event,'club',false);"><a href="/f?ct=486539264&cm=58580&tn=bdUserCenter&rs1=2#5">我的俱乐部</a>&nbsp;<img src="http://static.tieba.baidu.com/tb/img/login/icon.gif" class="down-arrow-hover" align="absmiddle"></div>
+<div id="myClubList" style="line-height:normal" class="body"  onmouseover="G_HIBAR.click(event,'club',true);" onmouseout="G_HIBAR.click(event,'club',false);">
+</div>
+</div>
+
+<!--我的空间-->
+<div class="loginTip" id="my_space_tip" style="display:none;">
+<div class="top" style="line-height:normal" onmouseover="G_HIBAR.click(event,'space',true);" onmouseout="G_HIBAR.click(event,'space',false);"><a href="http://hi.baidu.com/sys/checkuser//space?from=tieba" target="_blank">我的空间</a>&nbsp;<img src="http://static.tieba.baidu.com/tb/img/login/icon.gif" class="down-arrow-hover" align="absmiddle"></div>
+<div class="body" style="line-height:18px;*line-height:normal;padding-top:2px; padding-bottom:2px;" onmouseover="G_HIBAR.click(event,'space',true);" onmouseout="G_HIBAR.click(event,'space',false);">
+            <div style="line-height:18px;*line-height:normal;"><a href="http://hi.baidu.com/sys/checkuser//3?from=tieba" target="_blank"><b>主页</b></a>|<a href="http://hi.baidu.com/sys/checkuser//modify/spmodules/0?from=tieba" target="_blank">空间装扮</a></div>
+            <div style="line-height:18px;*line-height:normal;"><a href="http://hi.baidu.com/sys/checkuser//blog/?from=tieba" target="_blank"><b>博客</b></a>|<a href="http://hi.baidu.com/sys/checkuser//creat/blog/?from=tieba" target="_blank">写新文章</a></div>
+             <div style="line-height:18px;*line-height:normal;"><a href="http://hi.baidu.com/sys/checkuser//album?from=tieba" target="_blank"><b>相册</b></a>|<a href="http://hi.baidu.com/sys/checkuser//creat/picture/album?from=tieba" target="_blank">上传照片</a></div>
+            <div style="line-height:18px;*line-height:normal;"><a href="http://hi.baidu.com/sys/checkuser//friends?from=tieba" target="_blank"><b>好友</b></a>|<a href="http://hi.baidu.com/sys/uquery/?from=tieba" target="_blank">找新朋友</a></div>
+           <div style="line-height:18px;*line-height:normal;"><a href="http://hi.baidu.com/sys/checkuser//profile?from=tieba" target="_blank"><b>档案</b></a>|<a href="http://hi.baidu.com/sys/checkuser//board?from=tieba" target="_blank">留言板</a></div>
+</div>
+</div>
+<div style="text-align:left;" id="log"></div>
+<script>
+//LoginBar.requestData('forum');
+//if(GLOBAL_VAR.CLUB_OPEN)
+//	LoginBar.requestData('club');
+</script>
+
+
+
+
+
+
+
+							
+
+
+
+	
+
+	
+
+
+
+
+
+
+
+
+
+<form name=f1 onsubmit="return ForHeader.search(this)" action="/f">
+<input type=hidden name=ct value=318767104>
+<input type=hidden name=tn value="baiduKeywordSearch">
+<input type=hidden name=rn value=50>
+<input type=hidden name=pn value=0>
+<input type=hidden name=lm value="">
+<input type=hidden name=cm value=0>
+<input type=hidden name=kw value="">
+<input type=hidden name=rs2 value="0">
+<input type=hidden name=sc value="">
+<input type=hidden name=un value="">
+<input type=hidden name=rs1 value="0">
+<input type=hidden name=rs5 value="1">
+<input type=hidden name=sn value="">
+<input type=hidden name=rs6 value="0">
+<input type=hidden name=myselectvalue value="0">
+<table id="hdSearch" border="0" cellpadding="0" cellspacing="0">
+<tr><td valign="top"><a href="http://tieba.baidu.com/"><img src="http://img.baidu.com/img/post-jg.gif" border=0 alt="到百度贴吧首页"></a></td>
+<td valign="top" nowrap><div id="hdTopTag"><a href="http://news.baidu.com/ns?cl=2&rn=20&tn=news&" onclick="return ForHeader.setWord(this,'word');">新闻</a>&nbsp;&nbsp;&nbsp;<a href="http://www.baidu.com/s?cl=3&" onclick="return ForHeader.setWord(this,'wd');">网页</a>&nbsp;&nbsp;&nbsp;<strong>贴吧</strong>&nbsp;&nbsp;&nbsp;<a href="http://zhidao.baidu.com/q?ct=17&pn=0&tn=ikaslist&rn=10&" onclick="return ForHeader.setWord(this,'word');">知道</a>&nbsp;&nbsp;&nbsp;<a href="http://mp3.baidu.com/m?tn=baidump3&ct=134217728&lm=-1&" onclick="return ForHeader.setWord(this,'word');">MP3</a>&nbsp;&nbsp;&nbsp;<a href="http://image.baidu.com/i?tn=baiduimage&ct=201326592&lm=-1&cl=2&" onclick="return ForHeader.setWord(this,'word');">图片</a>&nbsp;&nbsp;&nbsp;<a href="http://video.baidu.com/v?ct=301989888&rn=20&pn=0&db=0&s=21&" onclick="return ForHeader.setWord(this,'word');">视频</a>&nbsp;&nbsp;&nbsp;<a href="http://baike.baidu.com/w?ct=17&lm=0&tn=baiduWikiSearch&pn=0&rn=10&submit=search&" onclick="return ForHeader.setWord(this,'word');">百科</a></div>
+<table border="0" cellspacing="0" cellpadding="0"><tr><td valign="top" nowrap><input class="i" maxlength=256 tabindex=1 size=42 id="wd1" value="嵇康" name=word>&nbsp;<input name="submit" type=submit value="百度一下"></td>
+<td nowrap>&nbsp;&nbsp;<a href="/f?ct=486539264&cm=58565&tn=bdAdvSearch&word=嵇康">吧内搜索</a>&nbsp;|&nbsp;<a href="http://www.baidu.com/search/post.html" target=_blank>帮助</a></td></tr></table>
+<label for="jointb"><input type="radio" name="tb" checked onclick="document.f1.myselectvalue.value=1;document.f1.rs2.value=0" id="jointb">进入贴吧</label> <label for="searchtb"><input type="radio" name="tb" id="searchtb">贴子搜索</label> <label for="authortb"><input type="radio" name="tb" id="authortb">按作者搜索</label></td></tr></table>
+</form>
+
+
+<!--Banner广告-->
+<div style="margin:0 0 5px 8px;width:84%"><script>if(!g_f_js){var g_f_js=true;document.write('<script src=\'http://eiv.baidu.com/other/ff.js\'></'+'script>');}</script>
+
+<script>if (typeof(cf)=="function") {cf("http://eiv.baidu.com/mc_files/20090605/20090605182906_65631300T1T396485.swf","760","90","http://ma.baidu.com/ma/rcv/click.php?t=uv-b5HDhTv-b5HcYPHRvFMIGujYkFhVGujYkFhqsULnqniuhUWdAULFdUiudThsqpZwYTaR1fiRzwBRzwM68mh7GuZR8mvqVFMP85HT1FMnqnyFhnHRduAnvnjc3PAw9riuzTAq15HDhuZfqUb9WuA4JRhVfnH01UWm","0");}</script>
+
+
+</div>
+
+
+<!-- Begin 导航栏 -->
+<table width="100%"  border="0" cellspacing="0" cellpadding="0" >
+  <tr>
+    <td nowrap>&nbsp;<a href="/" >百度贴吧</a> &gt; <a href="/f?kw=%EF%FA%BF%B5" ><cb>嵇康</cb>吧</a> &gt; 浏览贴子</td>
+    <td align="right" nowrap>吧主：<a href="http://passport.baidu.com/?detail&aid=6&default_tab=1&un=%C9%BD%D1%F3%D3%F3" target=_blank>山洋芋</a>&nbsp;<a href="http://passport.baidu.com/?detail&aid=6&default_tab=1&un=%E8%F7%EE%FD" target=_blank>梓铨</a>&nbsp;</td>
+  </tr>
+</table>
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#0000cc" id="nav_sub">
+	<tr>
+		<td nowrap="nowrap">&nbsp;
+		<a href="http://cang.baidu.com/do/add" onclick="window.open('http://cang.baidu.com/do/add?it='+encodeURIComponent(document.title)+'&iu='+encodeURIComponent(location.href)+'&tn=%E8%B4%B4%E5%90%A7%E8%B4%B4%E5%AD%90%2C&fr=tb#nw=1','_s','scrollbars=no,width=600,height=450,left=75,top=20,status=no,resizable=yes'); return false;" target="_blank" class="n">添加到搜藏</a>
+	  <span>|</span>
+
+		<a href="#sub" onclick="Post.reply('0');" class="n">快速回复</a>
+
+		</td>
+		<td align="right" nowrap="nowrap">
+
+
+			<a class="n" href="/tousu/new/add?pbtitle=%5B%D7%AA%CC%FB%5D%D2%B9%C0%D6%D6%AE%D4%C2%3C%B9%D8%D3%DA%EF%FA%BF%B5%BA%CD%B3%A4%C0%D6%CD%A4%D6%F7%3E%D7%F7%D5%DF%A3%BA%D0%EC%C8%F4%D3%A3" target="_blank">贴吧投诉</a>&nbsp;
+		</td>
+	</tr>
+</table>
+<!-- End 导航栏 -->
+
+<!-- Begin 右侧广告 id值保留原样-->
+<table border="0" align="right" cellpadding="0" cellspacing="0" id="rightAd">
+	<tr>
+	<td style="padding-top:10px;padding-right:3px;">
+			
+			<script>if(!g_f_js){var g_f_js=true;document.write('<script src=\'http://eiv.baidu.com/other/ff.js\'></'+'script>');}</script><table border=0 cellpadding=0 cellspacing=0><tr><td><table width=175 border=0 cellpadding=0 cellspacing=0 bordercolorlight=#9EC8DE bordercolordark=#FFFFFF><tr><td  bgcolor=#ECFAFF><a href='http://ma.baidu.com/ma/rcv/click.php?t=uv-b5HDhTv-b5HcdPWmsFMIGujYkFhVGujYzFhqsULnqnBuhUWdAULFdUiudThsqpZwYTaR1fiRzwBRzwhw9IAD8mh7GuZR8mvqVFHFAXyqdXAbdFMP85HcYFMnqnyFhnHRduAnvnjc3PAw9riuzTAq15HDhuZfqUb9WuA4JRhVfnH01UWm' target='_blank'><img src='http://eiv.baidu.com/mc_files/20090724/20090724154512_82569400T1T396485.jpg' width=224 height=240 border=0></a></td></tr></table><br>
+
+
+
+
+
+
+</td></tr></table>
+			
+			
+	<div class="cpro_post" id="cproshow"></div>
+	</td>
+	</tr>
+</table>
+<!-- End 右侧广告 -->
+
+<!-- **** Begin 贴子列表 **** -->
+<table width="72%"  border="0" cellpadding="0" cellspacing="0">
+<tr>
+  <td class="pg" style="padding-left:30px;padding-top:10px;padding-bottom:10px;">
+  	<div style="float:left;margin:5px 0 10px 0;">共有<font color="#ff0000">15</font>篇贴子&nbsp;&nbsp;</div>
+  	<div style="float:left;margin-top:1px;"><a href="#" onclick="Page.changeVersion(1);return false;" class="to_new_pb"></a></div></td>
+	</tr>
+</table>
+
+
+<a name="#1"></a>
+<table width="72%" border="0" bgcolor="#FFFFFF">
+	<tr>
+		<td height="17" align="center" width="3%" class="gray">1</td>
+		<td class="p14" align="left" >
+		<a name="5789263436"></a>
+
+		<font color="#0000cc">[转帖]夜乐之月&lt;关于嵇康和长乐亭主&gt;作者：徐若樱 </font>
+
+		</td>
+	</tr>
+	<tr><td></td>
+		<td align=left width="97%">
+		<table class="wr" border="0" cellspacing="0" cellpadding="0">
+			<tr><td class="gray14"> 
+
+
+			<cc>〔征文]&nbsp;夜乐之月&lt;关于嵇康和长乐亭主&gt;<br>&nbsp;2009-04-03&nbsp;19:52:47　　来自:&nbsp;徐若樱&nbsp;<br><br>　　　　昔我往矣&nbsp;<br>　　　　&nbsp;<br>　　　　她的父亲曾万分动情地赞美洛阳，眼睛泛起闪闪泪花；她则冷静地在一旁打岔：唔，的确风水不错，尤其是北邙，尤其适合埋葬一世庸碌却妄想后辈英杰层出不穷的人。&nbsp;<br>　　　　接着就是父亲的怒吼。而她合拢袖子低头遮掩冷酷又调皮的笑容，从容不迫地退入内室。仆役们都对这一幕麻木不仁，谁也不会多嘴嚼舌。&nbsp;<br>　　　　她的血统属于一个短暂的王族，几乎是平白跃上了至高无上的政治与文艺的顶峰；短暂的辉煌逝去，接下来必定跌入低谷……她的父亲喜爱文艺，但更热爱行军打仗和野外生活，兴致好的话是个风趣、聪明、随和又不失文雅的高尚人士，除了自大与自怜的情结让人失笑；祖先的热血在他血脉中奔流，同时带来了暴躁易怒、多疑猜忌的性格与永远无法实现的雄心壮志——血统带来尊贵与地位，也必然带来束缚和限制。她被封为长乐亭主那天，父亲先是骄矜自许后是自怜自艾，愤愤不平，那长达一天的叫骂可真够瞧的！&nbsp;<br>　　　　她充耳不闻，漠然地卷起书册退入更深的内室；她并不特别热爱读书，但只有在读书时，她才可以自由自在地遐思而不受打扰。如果父亲吼叫得太生猛，她就更加高声地弹琴作为回敬。&nbsp;<br>　　　　瞧，她就是长乐亭主。她的确不应该喜欢洛阳……横穿整个洛阳，她只爱马均的水车：那简直是一栋气势恢宏的建筑，因了流水的跌宕起伏而显得宛如活物；她眼眶湿润，从此爱上马均……那是她第一个爱的人。&nbsp;<br>　　　　她长大了一些，前来求婚的人开始排队。父亲兴高采烈，因为有更多事情可供他发笑或发怒，宅子里整天回响着他爽朗的笑声或是愤怒的吼叫，与之相和的是母亲或高或低的极力反驳与叱责。仆役们都对这一幕麻木不仁，谁也不会多嘴嚼舌……这是一种喧闹的寂静。&nbsp;<br>　　　　其实她不象大家想象的那样漂亮，当然也不象她父亲说的那样是个丑丫头；她和她一家的生活也并不比大家想象得更好或更差……哎，想象和现实，总是隔着无法逾越的鸿沟。&nbsp;<br>　　　　某一天父亲送走客人，大声吼叫着闯入内室：这个丑得见鬼的丫头总算找到了好婆家！我要把她许配给天下闻名俊美无双才华横溢的嵇康嵇叔夜！哼，要不是这丑丫头出身我英武的曹魏宗室，哪会攀到这么好的亲事！&nbsp;<br>　　　　她不动声色，内心的惊讶却并不比一旁的母亲所表现出得更少，一瞬间还有剧烈的失望：对水车，以及，马均。&nbsp;<br>　　　　婚事订下，可她还太小。&nbsp;<br>　　　　漫长的等待因为意义不明而显得格外漫长，教人泄气。随着朝中风波不断激荡，父亲的吼叫也大致分为嵇家想退婚与原来是误会两种截然相反的内容。&nbsp;<br>　　　　嵇家又派来了使者，长时间地和父亲密谈。然而这一次，父亲意志消沉，却什么也没说。&nbsp;<br>　　　　那天的晚饭并不比平时更惨淡，父母都板着乌云密布的脸也很常见；所以她吃得并不比平时更少或更不愉快，总之这是非常平和的一天。&nbsp;<br>　　　　然而她还是失眠了。&nbsp;<br>　　　　月光照进她的窗子，她困惑地坐起来。嵇叔夜的名字越来越成为整个洛阳少女们脸红心跳的公开秘密，而她却过于平凡，连亭主的封号都小得可怜！她什么都懂，读书、习字、弹琴、女红、畜牧、农耕……甚至是风水和手相！但没有一样出色，全都和她的长相一样平庸。&nbsp;<br>　　　　她象是被困惑引诱，一步步走进户外银亮的月色中。月光过于澄明清澈，她象是一刹被月光洗成透明，缓缓地舞动衣袖。&nbsp;<br>　　　　母亲从不阻止她任何学习的劲头，却唯独不许她跳舞，怕她变得轻浮放荡；而父亲看她赌气跳了几个动作之后，哈哈大笑：你更适合骑马与射箭！于是她只好气呼呼地冲进牛圈骑牛（这时代马太少了），鞭打最快的跑牛让它跑得更快。&nbsp;<br></cc>
+
+
+			</td></tr>
+		</table>
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+		<td class="p14">
+
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+
+		<td align="left" class="au" id="autonym" name="autonym" userid="5cb7b3e9ccebd7d01400">
+		<div class="uname">作者：<a href="http://hi.baidu.com/sys/checkuser/%B3%E9%CC%EB%D7%D0/3" target=_blank>抽屉仔</a></div>
+		<div class="youa"><a href="" target="_blank" class="youa_shop"></a></div>
+		<div class="im"><a href="#" onclick="UserIcon.chat('抽屉仔');return false;" class="msg"></a></div>
+
+		<div class="uau">
+
+
+		<span class="gray12 c_time">2009-4-5 10:04</span>
+
+		<a href="#sub" class=t onclick="Post.reply('1');">回复此发言</a>&nbsp;
+
+
+		</div>
+		</td>
+	</tr>
+
+	<tr><td></td><td><hr class="fenge" align="left" width="87%" size="1"></td></tr>
+</table>
+
+<a name="#2"></a>
+<table width="72%" border="0" bgcolor="#FFFFFF">
+	<tr>
+		<td height="17" align="center" width="3%" class="gray">2</td>
+		<td class="p14" align="left" >
+		<a name="5789263437"></a>
+
+		<font color="#0000cc">[转帖]夜乐之月&lt;关于嵇康和长乐亭主&gt;作者：徐若樱 </font>
+
+		</td>
+	</tr>
+	<tr><td></td>
+		<td align=left width="97%">
+		<table class="wr" border="0" cellspacing="0" cellpadding="0">
+			<tr><td class="gray14"> 
+
+
+			<cc>　　　　而这是半夜，庭中空无一人，她尽情又随意地起舞，折腰、甩袖、回眸……&nbsp;<br>　　　　铮地一声！&nbsp;<br>　　　　她一惊。随之而来的琴声悠扬柔和，象是有意配合她不甚熟练的动作，舒缓又优雅。&nbsp;<br>　　　　她舞完一曲，静默片刻。转身欲走，身后传来如月光般银色的噪音：您不问问我是谁吗？&nbsp;<br>　　　　您并不比月色更迷人。她继承自祖先的暴戾多疑，不动声色地绽放出了小小毒牙。&nbsp;<br>　　　　您却比月色更美。墙后的阴影处闪出高大身影。&nbsp;<br>　　　　她蓦地转身，迎向月光与来人：您眼神似乎不怎么样。&nbsp;<br>　　　　逆光的他面目模糊不清，她却觉得他在无声地大笑：您的确有自知之明。&nbsp;<br>　　　　嵇康终于赶来成婚。&nbsp;<br>　　　　父亲尽量凑拢钱财，筑起青庐举办婚宴，然而仪式仍然显得潦草与仓促，仿佛昭示了她未来的生活……她的家族正在走向不可避免的没落。&nbsp;<br>　　　　命定的夫君迈入青庐，她的怒火一瞬间被他的笑容点燃啦！&nbsp;<br>　　　　在平淡无奇的少女生活中，她一直都表现得从容又冷淡，一种默无声息的反抗与蔑视；她蔑视生活中的一切，家庭父母和自己；地位权势和金钱……甚至蔑视生活本身！她父亲斜眼看看她，不无忧虑地对母亲说：别的孩子都生龙活虎，怎么这丑丫头如此老气横秋？&nbsp;<br>　　　　在她冷漠的表面下，火热的生命力逐渐沸腾成熔岩，而在此刻被月夜乐者捅开了郁结的破口！&nbsp;<br>　　　　她跳起来扑向他，扯开他作为新郎华丽鲜艳的外套；他笑嘻嘻地抱住她，她随即在他白皙的肩头狠咬一口，接着就又抓、又捶、又挠！&nbsp;<br>　　　　她的少女时代结束了。&nbsp;<br>　　　　此后的很多年，在每一个人生重要时代的结束，她都会忆起新婚时的印象：淡淡的血腥味以及“我的指甲还不够长”的一瞬之想，挥之不去的无力感！简直令人气愤、困惑又屈辱。&nbsp;<br>　　　　&nbsp;<br>　　　　她还是度过了一段美好的时光。&nbsp;<br>　　　　嵇康任着闲职，工作似乎就是抄写经书与被人不断仰慕；他带她去订购马均新发明的最好的织机“绫机”，却不在乎她用不用；他还给她买了他们一生也用不到的指南车！他知道她爱马均，却并象父亲那样尖刻地不依不饶地嘲笑她。他们一起乘坐最豪华的牛车，他坐在车厢中哈哈大笑，放任她穿着他的长袍，挽起男子汉式的发髻，象车夫般疯狂地赶牛，跑过凌阴里、铜驼大道、永安里，跑遍整座洛阳城的大街小巷，一路横冲直撞，撞开贫民与高官，奴仆与皇族、撞开仰慕他或者嫉妒她的男男女女！&nbsp;<br>　　　　他们短暂地吵架、短暂地和好，然后疯狂地相爱和玩耍。他们似乎是要把毕生的精力、快乐与幸福在最短时间内全部挥霍，浓度之高接近爆炸！&nbsp;<br>　　　　那段时间分分秒秒都是几近疯狂的快乐，接下来就必定是双方的精疲力尽、两败俱伤！&nbsp;<br>　　　　&nbsp;<br>　　　　他们很快都厌倦了。他厌倦了毫无意义的工作、暗中排挤的同僚、过于热情的仰慕者和没完没了的家务；她厌倦了全洛阳女性的眼光与全洛阳男性的品头论足……还有嵇康。喔，他可能是全洛阳唯一一个不评论她的人，因为他已经没有了兴趣。&nbsp;<br>　　　　她曾感激他的宽容纵容，后来发现那不过是懒惰；接着，他的从容、潇洒、旷达……其实统统是懒惰！幼年失父的他被母亲和长兄娇纵坏了，只会喝喝酒谈谈天弹弹琴吟吟诗，再和朋友们鬼混，他根本不适合结婚！他的才华对煮饭洗衣买薪烧炭算帐养孩子等等完全无用，就这么满不在乎地听任家道中落，徒留她一人焦头烂额！&nbsp;<br>　　　　甚至他们全家搬离洛阳之后，他的朋友和仰慕者还从洛阳一直追来，清谈、诗歌、音乐，再加上酒与放旷，狂欢的宴会仍然夜以继日，通宵不息！&nbsp;<br>　　　　她命令奴仆踢走仰慕者，必要时还亲自挥鞭上阵，从小热爱牛马的她挥鞭的动作有力且优雅，所有人都望尘莫及，连被打者都赞叹得忘了躲避！&nbsp;<br>　　　　至于他的朋友们，她不冷不热地对待他们；完全根据她心情的好坏变化，给他们送上醇酒佳肴或是劣酒粗食；不理不睬或者象头蛮牛一样冲向他们，砸碎酒坛酒碗，把他们冲撞得七零八落，喝醉的一群人晕头转向，嵇康向她投来嫌恶又无可奈何的目光……&nbsp;<br>　　　　第一次见到山涛，她带着刻薄的笑容问嵇康：你是在结交朋友，还是想找位父亲代言人？向秀阮籍大概还能做你哥哥。你什么时候才能真正从父兄的阴影下走出来？&nbsp;<br>　　　　山涛和向秀有点尴尬，嵇康没有回答她，三人一起离开，去柳荫下打铁，后来就是在那里，嵇康碰上了钟会。&nbsp;<br>　　　　她稍后听说了这一会面，于是愤怒地责备嵇康，甚至还想派人去追钟会；她愤愤地说：你不应该如此对他！&nbsp;<br>　　　　嵇康冷淡地反问：为什么？因为他的官位、家族、前程、才能、人品还是其他？&nbsp;<br>　　　　嵇康无所谓的样子令她更加生气：因为他跟我非常相似，除了一点：对于想做的事情，他会不计代价不择手段地完成，而我不行！&nbsp;<br>　　　　他不解：这跟我有何关系？&nbsp;<br>　　　　她几乎浑身发抖：因为他和我一样，又嫉妒你又恨你。&nbsp;<br>　　　　那是一种像爱一样痴迷但却更加有驱动力的情感。&nbsp;<br>　　　　&nbsp;<br><br></cc>
+
+
+			</td></tr>
+		</table>
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+		<td class="p14">
+
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+
+		<td align="left" class="au" id="autonym" name="autonym" userid="5cb7b3e9ccebd7d01400">
+		<div class="uname">作者：<a href="http://hi.baidu.com/sys/checkuser/%B3%E9%CC%EB%D7%D0/3" target=_blank>抽屉仔</a></div>
+		<div class="youa"><a href="" target="_blank" class="youa_shop"></a></div>
+		<div class="im"><a href="#" onclick="UserIcon.chat('抽屉仔');return false;" class="msg"></a></div>
+
+		<div class="uau">
+
+
+		<span class="gray12 c_time">2009-4-5 10:04</span>
+
+		<a href="#sub" class=t onclick="Post.reply('2');">回复此发言</a>&nbsp;
+
+
+		</div>
+		</td>
+	</tr>
+
+	<tr><td></td><td><hr class="fenge" align="left" width="87%" size="1"></td></tr>
+</table>
+
+<a name="#3"></a>
+<table width="72%" border="0" bgcolor="#FFFFFF">
+	<tr>
+		<td height="17" align="center" width="3%" class="gray">3</td>
+		<td class="p14" align="left" >
+		<a name="5789264927"></a>
+
+		<font color="#0000cc">回复：[转帖]夜乐之月&lt;关于嵇康和长乐亭主&gt;作者：徐若樱 </font>
+
+		</td>
+	</tr>
+	<tr><td></td>
+		<td align=left width="97%">
+		<table class="wr" border="0" cellspacing="0" cellpadding="0">
+			<tr><td class="gray14"> 
+
+
+			<cc>　　　今我来思&nbsp;<br>　　　　&nbsp;<br>　　　　她回到洛阳是因为嵇康。&nbsp;<br>　　　　监狱的门前围着他的仰慕者，黑压压的一大片；他们为了探听嵇康的消息而向狱卒行贿；因为人数太多，这一行为变成了公开的买卖，他们紧盯着监狱大门，一有狱卒走出来，就不停地扔出钱币，简直象下雨一般！&nbsp;<br>　　　　一名狱卒洋洋得意地向听众宣布长乐亭主前来探望稽康的消息，很有几分宣旨官的气势；人群一阵骚动，投出更多的钱币，于是刚拖走一大袋子钱的两位小杂役不得不再次拿着大竹帚出来做工。&nbsp;<br>　　　　她被这场景吓住了，简直没有勇气跨下牛车；她通过人群，一阵阵嗡嗡的低语比袭人热浪更加令人窒息。&nbsp;<br>　　　　嵇康老了，也很憔悴。她不禁刻薄地想，如果外面的人们看到这样的他，还会不会甘愿付出如此代价追随他。&nbsp;<br>　　　　她给嵇康带来他的琴。&nbsp;<br>　　　　嵇康很高兴，她有点诧异：“我以为你会生气。”&nbsp;<br>　　　　“为什么？”&nbsp;<br>　　　　“你应该质问我为什么不带酒。”&nbsp;<br>　　　　“没有必要。”他轻抚琴弦，“因为我现在不需要再逃避任何东西了，包括你。”&nbsp;<br>　　　　她被这句话迅速染红眼眶。然而长久以来与父亲、嵇康以及生活对抗的顽强，令她克制住了即将崩溃的眼泪和情感，淡淡地扭转话题：“我昨晚去找了……”&nbsp;<br>　　　　“钟会？他不会答应你的。”嵇康平静地回答，“几年前你就已经很了解他了。”&nbsp;<br>　　　　她终于忍无可忍地爆发了！她拍案而起，震落古琴，掀翻矮几，揪住他的囚服！&nbsp;<br>　　　　“你到底在执着什么？因为我吗？可现在是我放下了全部骄傲在劝你！执着于道义吗？你的朋友们也不过是在背叛你与几乎背叛你之间！你的哥哥已经在百般讨好司马氏了，你还这样坚持有什么用？”她嚎啕大哭，几乎语不成句：“即使你参加叛乱也比现在好，我宁愿带着全家随你一道去死，也不愿意活下来再一次被你抛弃！虽然你一直在家庭中无故缺席，但你才是这个家的灵魂！你难道要我指着你的灵牌对儿女说：去问他吧，他就是才华横溢、俊逸无双的嵇康嵇叔夜，他因为无聊的罪名、莫须有的罪状被砍了头，你们应该为他骄傲？！”&nbsp;<br>　　　　“不要这样。”他温柔地抚慰她微微蓬乱的长发。“你一直都很勇敢，应该振作起来。就算我是这个家的灵魂，你才是这个家的骨骼。没有了我这个家会沉寂，但没有了你，这个家连形体也无法维持。”&nbsp;<br>　　　　“我死得的时候天气还很热。”他难得地一笑，“希望我的遗体不会太难看。全天下的人都称赞我俊美无双，唯独你从来没有称赞过我。”&nbsp;<br>　　　　她瞬间破泣而笑：“因为你比我还漂亮，我一直都在妒忌你！”唉，只要他愿意，瞬间就能阻止她的哭泣，可是他从来也不愿意……在竹林中冶游的那些年，她很少能见到他；他不停地打铁，用沉默和单调的劳动噪音逃避她的追问与责难，就象她当年用沉默和琴声回敬她的父亲！天气温暖的时候他就整夜不回家，她出于赌气和骄傲，宁可在思念与痛恨的双重煎熬中彻夜纺织也从不过问他如何过夜；由于太想念儿女，他半夜偷偷回来抱走年幼的儿子和女儿，领着他们在溪边玩耍，月下采薇，天亮之前把睡意蒙胧的他们送回家门口；为此她迁怒儿女，随意苛责殴打他们……无论是作为女儿、妻子还是母亲，她都一样不称职，所以此刻被夫君抛弃，显得那么顺理成章！&nbsp;<br>　　　　她走出监狱门的时候，刺目的阳光让她一阵眩晕。黑压压的人群齐刷刷地把目光投向她，带着让她焦灼不安的期待感……&nbsp;<br>　　　　她一言不发地登车离去，丝毫不理会身后的骚动；其实她很想对他们吼叫：你们！是你们用仰慕一步步逼死了他！但她还是压抑下了吼叫的冲动；他们不应该为他们带着好奇的仰慕心负责，就象她不应该为她带着嫉妒的爱意负责一样……嵇康和她也有几分相似，他们都太任性，只听从自己的心灵之声，凭一己之力与生活、与时代对抗，积极或消极地不停对抗&nbsp;<br>　　　　……他把自己树成一竿过于孤高的标竿，矗立在时代的道路上，注定了木秀于林的命运。&nbsp;<br>　　　　她和他一样从不执着于生，但她还不能向他一样乐于自我毁灭……她只有远离人群，独处自然之中才能彻底安静平和下来；无论是牛羊还是花草，都让她觉得自己还可以平和而快乐地活着。嵇康当初带她搬到荥阳，可曾有这些体贴的打算吗？她永远也不能知道了。&nbsp;<br>　　　　</cc>
+
+
+			</td></tr>
+		</table>
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+		<td class="p14">
+
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+
+		<td align="left" class="au" id="autonym" name="autonym" userid="5cb7b3e9ccebd7d01400">
+		<div class="uname">作者：<a href="http://hi.baidu.com/sys/checkuser/%B3%E9%CC%EB%D7%D0/3" target=_blank>抽屉仔</a></div>
+		<div class="youa"><a href="" target="_blank" class="youa_shop"></a></div>
+		<div class="im"><a href="#" onclick="UserIcon.chat('抽屉仔');return false;" class="msg"></a></div>
+
+		<div class="uau">
+
+
+		<span class="gray12 c_time">2009-4-5 10:05</span>
+
+		<a href="#sub" class=t onclick="Post.reply('3');">回复此发言</a>&nbsp;
+
+
+		</div>
+		</td>
+	</tr>
+
+	<tr><td></td><td><hr class="fenge" align="left" width="87%" size="1"></td></tr>
+</table>
+
+<a name="#4"></a>
+<table width="72%" border="0" bgcolor="#FFFFFF">
+	<tr>
+		<td height="17" align="center" width="3%" class="gray">4</td>
+		<td class="p14" align="left" >
+		<a name="5789544257"></a>
+
+		<font color="#0000cc">回复：[转帖]夜乐之月&lt;关于嵇康和长乐亭主&gt;作者：徐若樱 </font>
+
+		</td>
+	</tr>
+	<tr><td></td>
+		<td align=left width="97%">
+		<table class="wr" border="0" cellspacing="0" cellpadding="0">
+			<tr><td class="gray14"> 
+
+
+			<cc>　　　我思故人&nbsp;<br>　　　　&nbsp;<br>　　　　嵇康去世后，长乐亭主把所有与嵇康有关的东西全都扔入地窖，只差儿女仆役和自己。&nbsp;<br>　　　　最后扔下去的是嵇康的琴。女儿与她剧烈地争夺，眼睛里满是恨、恨、恨。&nbsp;<br>　　　　女儿恨她，恨她独断专行，恨她举止失当，恨她无法挽救自己心爱的父亲，恨她……不够爱父亲，也不爱自己……她的母亲除了象个半疯之人之外，谁都不爱！&nbsp;<br>　　　　她一把推倒女儿，锁上地窖；女儿的表情让她一震：她分明看到了少女时代的自己。对父亲对家族以及对生活的轻蔑、厌恶、仇视、无可奈何……一副生无所欢的神色！&nbsp;<br>　　　　然而女儿是嵇康最宠爱的孩子，也是最完美的翻版；她曾平淡地忍受下来的生活女儿却无法忍受，愤而吞下了家中所有的丹药和五石散！那是嵇康一度求仙炼丹的成果，他在山里采集草药，被樵夫误认为下凡的仙人，而她嘲笑他最多能炼出点毒药，连伤寒都治不好！&nbsp;<br>　　　　一语成谶。&nbsp;<br>　　　　长乐亭主砸开地窖的锁，取出琴交给女儿……她抱着琴，拉着弟弟的手去世了。&nbsp;<br>　　　　嵇绍的神色有点木然，没有过多的哀伤……因为没有用。这个文静的孩子自出生以来一直被人忽视和遗弃，结果到后来谁也说不清他的文静是因为天性还是因为明白吵闹无用。&nbsp;<br>　　　　&nbsp;<br>　　　　女儿的决绝尤如一记惨烈的复仇，只是说不清是她对母亲的复仇，还是代父亲完成了对母亲的复仇，或许兼而有之？&nbsp;<br>　　　　长乐亭主彻底崩溃了。她象一个幽灵，独自在外游荡：碣石海边，楼船，牛圈，竹林，寺院，道观，荒野……大家都说她疯了。当年嵇康不愿回家是逃避她，她则是逃避回忆、思念、悔恨……以及不停地自我折磨，以示惩罚。&nbsp;<br>　　　　&nbsp;<br>　　　　她终于疲倦了，回到故宅。她已不再年轻，即使仍然激动易怒，她的声音也由尖利变成了沉郁，咆哮怒斥也变为刻薄的嘲弄；长久的思念即使是锋利的刀剑，在无比柔软的人心深处用时光磨砺，也会变得钝重起来。&nbsp;<br>　　　　嵇绍已经成年，山涛再度来到荥阳。&nbsp;<br>　　　　他劝说嵇绍，言词委婉又动人；而这个文静到沉闷的俊美青年一言不发……长乐亭主出现了。&nbsp;<br>　　　　“您很有勇气，还敢到被您侍奉的主子无辜砍头的可怜人家里来？”她冷嘲热讽。&nbsp;<br>　　　　“内人一直对嵇康抱着过分的好感。如果我不来看望，连她也不会放过我的。”山涛巧妙地回敬她曾经的无稽醋意，“我想，她也很乐意看到故人之子回到洛阳，享受他该得的荣耀。”&nbsp;<br>　　　　“您的来意不是很可笑吗？”她质问，“司马氏用不孝的罪名处死了嵇康，而嵇绍侍奉杀父仇人的家族，难道不是更严重的不孝？”&nbsp;<br>　　　　……&nbsp;<br>　　　　她突然起身离席：“我老了，倦于见人，就随您的意思吧。”&nbsp;<br>　　　　大家全体愕然！&nbsp;<br>　　　　嵇康的老仆人高高兴兴地整理行囊准备启程，长乐亭主出现在牛车旁。立即一阵肃杀之气，仿佛连空气都冻结！&nbsp;<br>　　　　嵇绍无动于衷地迎上前来。长乐亭主凝视着他，他毫无疑问非常俊秀，但毕竟比不上他的父亲……唉！即使嵇康对她再差劲些，即使是在二十年后，她还是会认为他天下无双！&nbsp;<br>　　　　“您的父亲因为可笑的罪名和无稽的事实被司马氏砍了头，而您如今前去归附司马氏，也不会比您父亲当年的处境更安全。这是您在洛阳的安家费。您好自为之吧。”她从袖中掏出一袋钱扔到车上：“另外，把这匹牛换掉，它太老了，跑不了长途。”&nbsp;<br>　　　　嵇绍冷淡地一揖到地。&nbsp;<br>　　　　&nbsp;<br>　　　　嵇绍离去的故宅更加安静……她的老乳母为她梳头，用漏风的嘴巴慢悠悠地说：“夫人，如果您想留下公子，就应该拉住他的袖子，而不是……”&nbsp;<br></cc>
+
+
+			</td></tr>
+		</table>
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+		<td class="p14">
+
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+
+		<td align="left" class="au" id="autonym" name="autonym" userid="5cb7b3e9ccebd7d01400">
+		<div class="uname">作者：<a href="http://hi.baidu.com/sys/checkuser/%B3%E9%CC%EB%D7%D0/3" target=_blank>抽屉仔</a></div>
+		<div class="youa"><a href="" target="_blank" class="youa_shop"></a></div>
+		<div class="im"><a href="#" onclick="UserIcon.chat('抽屉仔');return false;" class="msg"></a></div>
+
+		<div class="uau">
+
+
+		<span class="gray12 c_time">2009-4-5 11:17</span>
+
+		<a href="#sub" class=t onclick="Post.reply('4');">回复此发言</a>&nbsp;
+
+
+		</div>
+		</td>
+	</tr>
+
+	<tr><td></td><td><hr class="fenge" align="left" width="87%" size="1"></td></tr>
+</table>
+
+<a name="#5"></a>
+<table width="72%" border="0" bgcolor="#FFFFFF">
+	<tr>
+		<td height="17" align="center" width="3%" class="gray">5</td>
+		<td class="p14" align="left" >
+		<a name="5789544258"></a>
+
+		<font color="#0000cc">回复：[转帖]夜乐之月&lt;关于嵇康和长乐亭主&gt;作者：徐若樱 </font>
+
+		</td>
+	</tr>
+	<tr><td></td>
+		<td align=left width="97%">
+		<table class="wr" border="0" cellspacing="0" cellpadding="0">
+			<tr><td class="gray14"> 
+
+
+			<cc>　　　　她怅然一笑：“他应该离开了。”&nbsp;<br>　　　　她如此决定是因为嵇绍……的眼睛：清澈、明亮却毫无生气……她的生命所剩无几，空余对嵇康的怀思；而她的儿子还年轻，不该被她这样困守一生。儿子的眼睛让她重忆自己的少女时代，她就以这样的眼睛看着父亲……&nbsp;<br>　　　　她哑然失笑：未嫁时她曾发誓不做母亲那样的怨妇，不做父亲那样的家长；但现在，她对父亲做过的事如同报应般折返到她身上。&nbsp;<br>　　　　&nbsp;<br>　　　　她并未想到自己有生之年还会返回洛阳。然而偶然听闻了仆役的密谈，她连夜驾牛车奔赴洛阳……然后碰上了阮瞻。&nbsp;<br>　　　　她和阮瞻象母子一般挽着手四处游玩，终于被嵇绍抓到了把柄，于是嵇绍象拆散一对狼狈为奸的小乱党一样把她押上牛车带走啦。&nbsp;<br>　　　　她少见地顺从，却禁不住乐了：“莫非你是在妒忌小阮？”&nbsp;<br>　　　　“难道我连妒忌的权利也没有吗？”嵇绍沉默片刻才回答，绷得紧紧的后背透出一股强烈的怒气。&nbsp;<br>　　　　她哈哈大笑，一直笑倒在牛车里，同时感觉到酸楚的甜蜜；也许她应该扑过去拥抱嵇绍，紧紧拥抱他，象是从来没有过那些疏离嫌隙的时光一样……&nbsp;<br>　　　　可惜！他们谁都没有动；疏离感自始至终都切实存在，他们已错过那些本该最亲密美好的时光。&nbsp;<br>　　　　&nbsp;<br>　　　　后来她问阮瞻：“知道我为什么对你这么好吗？”&nbsp;<br>　　　　阮瞻天真地回答：“因为嵇绍？”他的天真和单纯真是非常可怕！&nbsp;<br>　　　　她大笑：“不，是因为我知道，我不会真正爱你。”&nbsp;<br>　　　　“那你真正爱过谁？”小阮追问。&nbsp;<br>　　　　“均。”她脱口而出。&nbsp;<br>　　　　“我还以为会是嵇绍的老爸……”小阮嘀咕。&nbsp;<br>　　　　“不，是马均。真正地、毫无保留地、无所顾忌地爱他。”她认真纠正他。&nbsp;<br>　　　　是的，她爱马均，马均对她而言象一个不可企及的神话，他把丰沛的生命力和聪明才智全都兑换成固化的外物，切实，清晰，从不模棱两可，扑朔迷离……他仿佛不是往发明的器物中注入灵魂，而是直接用灵魂化成了精妙的器物，她从器物中轻易地读懂他的灵魂，从而轻易地为他折服；而她和嵇康，却将生命力白白耗费在日复一日的争吵、猜忌、怒火、疏离、孤高、散漫中，最终一个彻底沉寂，一个早早殒折！&nbsp;<br>　　　　谁也不知道他们是多么剧烈地相爱，然后多么剧烈地互相折磨，互相仇恨，互相思念！嵇康留下了傲骨和诗篇，而她只将留下“嵇康之妻，曹氏之女”的头衔！&nbsp;<br>　　　　然而即使是鬼斧神工般的马均，也无法做出“思念”的模样……&nbsp;<br>　　　　“那么嵇康呢？”小阮不屈不挠地追问。&nbsp;<br>　　　　“我们互相折磨。”她很坦白，“这感情太过剧烈，以致于到现在，我也不敢肯定那是爱情。就算是，也肯定不够纯粹……就因为这样，我一直不能接近嵇绍……他是离嵇康最近的人。”&nbsp;<br>　　　　“直到现在我都在思念他，常常忘记其他人的存在。”她这样结尾。&nbsp;<br>　　　　&nbsp;<br>　　　　&nbsp;<br>　　　　嵇绍象是被月色惊醒了。他披起纯白的外套，漫无目的地走了出去。&nbsp;<br>　　　　多刺的枳树林象是荥阳故宅那半荒废的庭院中离离草木，但是不要说，说了嵇绍也不会承认。&nbsp;<br>　　　　月色清澄得过分，起舞女子的清影优美动人。&nbsp;<br>　　　　&nbsp;<br>　　　　长乐亭主蓦地一惊：“谁？……嵇绍？”&nbsp;<br>　　　　她的眼神看不清楚是怀恋还是忧伤。一切都如同当年月夜，只是观众再不可能是那个人。&nbsp;<br>　　　　嵇绍则是冷酷的惊讶：“夫人，您会弹《广陵散》？”&nbsp;<br>　　　　“不，我不会。”&nbsp;<br>　　　　“但您刚才轻吟的乐曲的确是……”&nbsp;<br>　　　　“广陵散？”她惊讶地反问，继而失落地微笑：“这是我和你父亲第一次相见时，他在月下为我弹的曲子……我只听过一次。”&nbsp;<br>　　　　一生只为她弹了一次的曲子，却原来是他的最高技艺，完美的绝唱？&nbsp;<br>　　　　“您能再吟一遍吗？”&nbsp;<br>　　　　父亲去世后，姐姐抱着他的琴，凭着记忆断断续续地拼凑《广陵散》，聪颍过人的姐姐，也未记下这曲子的一半……而嵇绍，只记得姐姐弹出的几个音符，象是垂死的龙吟……&nbsp;<br>　　　　令人毛骨悚然。&nbsp;<br>　　　　她注视着嵇绍：“拿琴来。”&nbsp;<br>　　　　燃起烛火，净手焚香，嵇绍捧上父亲的古琴。长乐亭主凝神屏息，缓缓抬起双手——&nbsp;<br>　　　　嵇绍也不由得屏住了呼吸。&nbsp;<br>　　　　她的手指悬空，并未落到弦上。然后轻轻拨动……她的指法完全正确！&nbsp;<br>　　　　嵇绍百感交集：父亲在刑场上自叹广陵散从此绝响，三千人一齐落泪，却没有一个人能够过耳不忘……他曾以为自己过目不忘的本领是遗传自父亲，难道却是来自于终日忙于俗务的母亲？&nbsp;<br>　　　　血缘的深远微妙永远超越人所能想象。&nbsp;<br>　　　　曲终，寂然。&nbsp;<br>　　　　“你全都记住了吧？”长乐亭主疲倦地问。“你要答应我一点，”她接着说，“永远不要弹这曲子。你的父亲唯一留给我，为我独有的就是这支曲子。我太自私，不愿将这曲子交给他人分享……即使是你。”&nbsp;<br>　　　　“我答应您，永远不弹。”嵇绍直视母亲的眼睛，回答坚定。他和母亲之间籍由这首本已失传的曲子，终于结成了血缘之上的感情纽带。&nbsp;<br>　　　　&nbsp;<br>　　　　山涛告诉嵇绍：“我妻子见过你的父母。她说，天下只有你的母亲，才配得上嵇郎。但是，他们太相似，都是感情浓烈之人，所以注定不能幸福。”&nbsp;<br>　　　　嵇绍心不在焉地望着天空：“我也想娶个在我死去二十年之后还在剧烈爱我的姑娘。”</cc>
+
+
+			</td></tr>
+		</table>
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+		<td class="p14">
+
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+
+		<td align="left" class="au" id="autonym" name="autonym" userid="5cb7b3e9ccebd7d01400">
+		<div class="uname">作者：<a href="http://hi.baidu.com/sys/checkuser/%B3%E9%CC%EB%D7%D0/3" target=_blank>抽屉仔</a></div>
+		<div class="youa"><a href="" target="_blank" class="youa_shop"></a></div>
+		<div class="im"><a href="#" onclick="UserIcon.chat('抽屉仔');return false;" class="msg"></a></div>
+
+		<div class="uau">
+
+
+		<span class="gray12 c_time">2009-4-5 11:17</span>
+
+		<a href="#sub" class=t onclick="Post.reply('5');">回复此发言</a>&nbsp;
+
+
+		</div>
+		</td>
+	</tr>
+
+	<tr><td></td><td><hr class="fenge" align="left" width="87%" size="1"></td></tr>
+</table>
+
+<a name="#6"></a>
+<table width="72%" border="0" bgcolor="#FFFFFF">
+	<tr>
+		<td height="17" align="center" width="3%" class="gray">6</td>
+		<td class="p14" align="left" >
+		<a name="5794606026"></a>
+
+		<font color="#0000cc">回复：[转帖]夜乐之月&lt;关于嵇康和长乐亭主&gt;作者：徐若樱 </font>
+
+		</td>
+	</tr>
+	<tr><td></td>
+		<td align=left width="97%">
+		<table class="wr" border="0" cellspacing="0" cellpadding="0">
+			<tr><td class="gray14"> 
+
+
+			<cc>实获我心&nbsp;<br>　　　　&nbsp;<br>　　　　长乐亭主永远也不知道，其实她和嵇康的第一次见面还要更早，那时她太幼小了。&nbsp;<br>　　　　年轻的嵇康头一次见到长乐亭主是在许昌初春的郊外。&nbsp;<br>　　　　他无所事事地以洛阳为圆心漫游，一直跑到了许昌，看看破败的旧王宫铜雀台也不错。&nbsp;<br>　　　　她鞭策犟牛，从他身边的田野里飞驰而过，肆无忌惮地践踏麦苗，松散的长发随风舞动，一路向东，似乎要纵身跃入初升的朝阳！空旷广袤的田野上充斥着她剧烈的笑声。天呐！她的骑术实在太好啦！完全应该去送八百里加急军情！寒冷的空气和激扬的热血，为她稚气倔强又聪慧冷静的小脸染上双重红晕，娇艳得胜过所有的胭脂！&nbsp;<br>　　　　紧追在后面的是她的父亲，既为女儿骄傲，又为女儿担心，开心地吼叫着。他很有气势地挥动鞭子，但却没有女儿那种天然的优雅；怎么追也追不上她！再后面的牛车坐着贵夫人和一群小鬼，大概是她的母亲和兄弟姐妹，被狂奔的牛搞得上下颠簸，脸色难看抱怨连连。&nbsp;<br>　　　　他远远地看着她危险地在飞驰的牛背上转身，朝着父亲大笑着做鬼脸；她帮助母亲采摘鲜嫩的荠菜，提着装得满满的篮子步履蹒跚，然后随性地把它一脚踢开，由它一路滚下河滩，侍童们大呼小叫地去捡……她的任性、她的快乐、她过于澎湃的生命力都令他动容。&nbsp;<br>　　　　他凑近附近看车的仆役：“那个漂亮活泼得象妖精的女孩是谁？”&nbsp;<br>　　　　仆役只顾倚着车轮打呵欠：“长乐亭主。她们一家来郊游顺带接受军旅教育，天不亮就从洛阳上路，一路跑到了许昌。”&nbsp;<br>　　　　他很惊奇：“长乐亭主自己骑牛一直跑到了这里么？”&nbsp;<br>　　　　“当然。她擅长养牛驯牛和骑牛，这对她来说是小事一桩。”&nbsp;<br>　　　　长乐亭主。他默念，这个名字将会伴随他终生。&nbsp;<br>　　　　&nbsp;<br>　　　　稽喜问他：和长乐亭主的婚约是不是取消？如果现在放弃与曹家的联姻，将来你也许可以娶到更好的姑娘。&nbsp;<br>　　　　嵇康微微一笑：“我不可能娶到比她更好的公主。”&nbsp;<br>　　　　&nbsp;<br>　　　　&nbsp;2009年4月1日22：48完</cc>
+
+
+			</td></tr>
+		</table>
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+		<td class="p14">
+
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+
+		<td align="left" class="au" id="autonym" name="autonym" userid="5cb7b3e9ccebd7d01400">
+		<div class="uname">作者：<a href="http://hi.baidu.com/sys/checkuser/%B3%E9%CC%EB%D7%D0/3" target=_blank>抽屉仔</a></div>
+		<div class="youa"><a href="" target="_blank" class="youa_shop"></a></div>
+		<div class="im"><a href="#" onclick="UserIcon.chat('抽屉仔');return false;" class="msg"></a></div>
+
+		<div class="uau">
+
+
+		<span class="gray12 c_time">2009-4-6 10:05</span>
+
+		<a href="#sub" class=t onclick="Post.reply('6');">回复此发言</a>&nbsp;
+
+
+		</div>
+		</td>
+	</tr>
+
+	<tr><td></td><td><hr class="fenge" align="left" width="87%" size="1"></td></tr>
+</table>
+
+<a name="#7"></a>
+<table width="72%" border="0" bgcolor="#FFFFFF">
+	<tr>
+		<td height="17" align="center" width="3%" class="gray">7</td>
+		<td class="p14" align="left" >
+		<a name="5815989810"></a>
+
+		<font color="#0000cc">回复：[转帖]夜乐之月&lt;关于嵇康和长乐亭主&gt;作者：徐若樱 </font>
+
+		</td>
+	</tr>
+	<tr><td></td>
+		<td align=left width="97%">
+		<table class="wr" border="0" cellspacing="0" cellpadding="0">
+			<tr><td class="gray14"> 
+
+
+			<cc>哎呀！~这篇……写得很有抽抽的风格呢~~<br>不过个人感觉还是抽抽的文风比较爽硬~~<br>若樱SAMA写得比较柔骨一点，跳跃也没那么快哈！~不过正好可以作为《夜想狂澜》的补充……不过还是有一点不明白，嵇康先生和长乐亭主的感情应该不错呀~虽然在抽抽在笔下变得很……爱恨相缠。<br>但我始终不知道他们为什么要这样~~~呜咕</cc>
+
+
+			</td></tr>
+		</table>
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+		<td class="p14">
+
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+
+		<td align="left" class="au" id="autonym" name="autonym" userid="f820d0a1b1c8bae92900">
+		<div class="uname">作者：<a href="http://hi.baidu.com/sys/checkuser/%D0%A1%B1%C8%BA%E9/3" target=_blank>小比洪</a></div>
+		<div class="youa"><a href="" target="_blank" class="youa_shop"></a></div>
+		<div class="im"><a href="#" onclick="UserIcon.chat('小比洪');return false;" class="msg"></a></div>
+
+		<div class="uau">
+
+
+		<span class="gray12 c_time">2009-4-11 00:55</span>
+
+		<a href="#sub" class=t onclick="Post.reply('7');">回复此发言</a>&nbsp;
+
+
+		</div>
+		</td>
+	</tr>
+
+	<tr><td></td><td><hr class="fenge" align="left" width="87%" size="1"></td></tr>
+</table>
+
+<a name="#8"></a>
+<table width="72%" border="0" bgcolor="#FFFFFF">
+	<tr>
+		<td height="17" align="center" width="3%" class="gray">8</td>
+		<td class="p14" align="left" >
+		<a name="5816692375"></a>
+
+		<font color="#0000cc">回复：[转帖]夜乐之月&lt;关于嵇康和长乐亭主&gt;作者：徐若樱 </font>
+
+		</td>
+	</tr>
+	<tr><td></td>
+		<td align=left width="97%">
+		<table class="wr" border="0" cellspacing="0" cellpadding="0">
+			<tr><td class="gray14"> 
+
+
+			<cc>大概是长乐亭主觉得人生中没有多少欢乐可供与嵇康分享。</cc>
+
+
+			</td></tr>
+		</table>
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+		<td class="p14">
+
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+
+		<td align="left" class="au" id="autonym" name="autonym" userid="5cb7b3e9ccebd7d01400">
+		<div class="uname">作者：<a href="http://hi.baidu.com/sys/checkuser/%B3%E9%CC%EB%D7%D0/3" target=_blank>抽屉仔</a></div>
+		<div class="youa"><a href="" target="_blank" class="youa_shop"></a></div>
+		<div class="im"><a href="#" onclick="UserIcon.chat('抽屉仔');return false;" class="msg"></a></div>
+
+		<div class="uau">
+
+
+		<span class="gray12 c_time">2009-4-11 10:12</span>
+
+		<a href="#sub" class=t onclick="Post.reply('8');">回复此发言</a>&nbsp;
+
+
+		</div>
+		</td>
+	</tr>
+
+	<tr><td></td><td><hr class="fenge" align="left" width="87%" size="1"></td></tr>
+</table>
+
+<a name="#9"></a>
+<table width="72%" border="0" bgcolor="#FFFFFF">
+	<tr>
+		<td height="17" align="center" width="3%" class="gray">9</td>
+		<td class="p14" align="left" >
+		<a name="5907572874"></a>
+
+		<font color="#0000cc">回复：[转帖]夜乐之月&lt;关于嵇康和长乐亭主&gt;作者：徐若樱 </font>
+
+		</td>
+	</tr>
+	<tr><td></td>
+		<td align=left width="97%">
+		<table class="wr" border="0" cellspacing="0" cellpadding="0">
+			<tr><td class="gray14"> 
+
+
+			<cc>公无渡河,公竟渡河.堕河而死,将奈公何!<br>你若能明白这个渔翁为什么要渡河,大概就能明白他们为什么要这样~~</cc>
+
+
+			</td></tr>
+		</table>
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+		<td class="p14">
+
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+
+		<td align="left" class="au" id="autonym" name="autonym" userid="c081d3c4c1f7b6c1cae9ee00">
+		<div class="uname">作者：<a href="http://hi.baidu.com/sys/checkuser/%D3%C4%C1%F7%B6%C1%CA%E9/3" target=_blank>幽流读书</a></div>
+		<div class="youa"><a href="" target="_blank" class="youa_shop"></a></div>
+		<div class="im"><a href="#" onclick="UserIcon.chat('幽流读书');return false;" class="msg"></a></div>
+
+		<div class="uau">
+
+
+		<span class="gray12 c_time">2009-5-1 13:48</span>
+
+		<a href="#sub" class=t onclick="Post.reply('9');">回复此发言</a>&nbsp;
+
+
+		</div>
+		</td>
+	</tr>
+
+	<tr><td></td><td><hr class="fenge" align="left" width="87%" size="1"></td></tr>
+</table>
+
+<a name="#10"></a>
+<table width="72%" border="0" bgcolor="#FFFFFF">
+	<tr>
+		<td height="17" align="center" width="3%" class="gray">10</td>
+		<td class="p14" align="left" >
+		<a name="5909014341"></a>
+
+		<font color="#0000cc">回复：[转帖]夜乐之月&lt;关于嵇康和长乐亭主&gt;作者：徐若樱 </font>
+
+		</td>
+	</tr>
+	<tr><td></td>
+		<td align=left width="97%">
+		<table class="wr" border="0" cellspacing="0" cellpadding="0">
+			<tr><td class="gray14"> 
+
+
+			<cc>囧~~~~~长拧了……</cc>
+
+
+			</td></tr>
+		</table>
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+		<td class="p14">
+
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+
+		<td align="left" class="au" id="autonym" name="autonym" userid="f6c0c9bdd1f3d3f34e00">
+		<div class="uname">作者：<a href="http://hi.baidu.com/sys/checkuser/%C9%BD%D1%F3%D3%F3/3" target=_blank>山洋芋</a></div>
+		<div class="youa"><a href="" target="_blank" class="youa_shop"></a></div>
+		<div class="im"><a href="#" onclick="UserIcon.chat('山洋芋');return false;" class="msg"></a></div>
+
+		<div class="uau">
+
+
+		<span class="gray12 c_time">2009-5-1 18:49</span>
+
+		<a href="#sub" class=t onclick="Post.reply('10');">回复此发言</a>&nbsp;
+
+
+		</div>
+		</td>
+	</tr>
+
+	<tr><td></td><td><hr class="fenge" align="left" width="87%" size="1"></td></tr>
+</table>
+
+<a name="#11"></a>
+<table width="72%" border="0" bgcolor="#FFFFFF">
+	<tr>
+		<td height="17" align="center" width="3%" class="gray">11</td>
+		<td class="p14" align="left" >
+		<a name="5922189109"></a>
+
+		<font color="#0000cc">回复：[转帖]夜乐之月&lt;关于嵇康和长乐亭主&gt;作者：徐若樱 </font>
+
+		</td>
+	</tr>
+	<tr><td></td>
+		<td align=left width="97%">
+		<table class="wr" border="0" cellspacing="0" cellpadding="0">
+			<tr><td class="gray14"> 
+
+
+			<cc>没有实现成熟的夫妻关系，没有实现自我，预期与现实落差太大。估计嵇康对这段婚姻也是有苦说不出，双方都只处于“业余婚姻”阶段。</cc>
+
+
+			</td></tr>
+		</table>
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+		<td class="p14">
+
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+
+		<td align="left" class="au" id="autonym" name="autonym" userid="5cb7b3e9ccebd7d01400">
+		<div class="uname">作者：<a href="http://hi.baidu.com/sys/checkuser/%B3%E9%CC%EB%D7%D0/3" target=_blank>抽屉仔</a></div>
+		<div class="youa"><a href="" target="_blank" class="youa_shop"></a></div>
+		<div class="im"><a href="#" onclick="UserIcon.chat('抽屉仔');return false;" class="msg"></a></div>
+
+		<div class="uau">
+
+
+		<span class="gray12 c_time">2009-5-4 08:30</span>
+
+		<a href="#sub" class=t onclick="Post.reply('11');">回复此发言</a>&nbsp;
+
+
+		</div>
+		</td>
+	</tr>
+
+	<tr><td></td><td><hr class="fenge" align="left" width="87%" size="1"></td></tr>
+</table>
+
+<a name="#12"></a>
+<table width="72%" border="0" bgcolor="#FFFFFF">
+	<tr>
+		<td height="17" align="center" width="3%" class="gray">12</td>
+		<td class="p14" align="left" >
+		<a name="5922340984"></a>
+
+		<font color="#0000cc">回复：[转帖]夜乐之月&lt;关于嵇康和长乐亭主&gt;作者：徐若樱 </font>
+
+		</td>
+	</tr>
+	<tr><td></td>
+		<td align=left width="97%">
+		<table class="wr" border="0" cellspacing="0" cellpadding="0">
+			<tr><td class="gray14"> 
+
+
+			<cc>有理由相信嵇康一开始就没有想结婚，他是单身修仙俱乐部的成员，从来就没有作过当丈夫的心理准备，事后也没有想过要积极的适应。</cc>
+
+
+			</td></tr>
+		</table>
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+		<td class="p14">
+
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+
+		<td align="left" class="au" id="autonym" name="autonym" userid="f6c0c9bdd1f3d3f34e00">
+		<div class="uname">作者：<a href="http://hi.baidu.com/sys/checkuser/%C9%BD%D1%F3%D3%F3/3" target=_blank>山洋芋</a></div>
+		<div class="youa"><a href="" target="_blank" class="youa_shop"></a></div>
+		<div class="im"><a href="#" onclick="UserIcon.chat('山洋芋');return false;" class="msg"></a></div>
+
+		<div class="uau">
+
+
+		<span class="gray12 c_time">2009-5-4 09:33</span>
+
+		<a href="#sub" class=t onclick="Post.reply('12');">回复此发言</a>&nbsp;
+
+
+		</div>
+		</td>
+	</tr>
+
+	<tr><td></td><td><hr class="fenge" align="left" width="87%" size="1"></td></tr>
+</table>
+
+<a name="#13"></a>
+<table width="72%" border="0" bgcolor="#FFFFFF">
+	<tr>
+		<td height="17" align="center" width="3%" class="gray">13</td>
+		<td class="p14" align="left" >
+		<a name="5922996213"></a>
+
+		<font color="#0000cc">回复：[转帖]夜乐之月&lt;关于嵇康和长乐亭主&gt;作者：徐若樱 </font>
+
+		</td>
+	</tr>
+	<tr><td></td>
+		<td align=left width="97%">
+		<table class="wr" border="0" cellspacing="0" cellpadding="0">
+			<tr><td class="gray14"> 
+
+
+			<cc>哇，没想到抽殿把偶的文又贴到这里来啦，好羞～～<br>大家就权当《夜想狂澜》的补完文看就好啦～～扭～～<br>呜，偶在不知不觉中模仿了抽殿的风格～～抽殿的气场太强大，一靠近就很难不被吸引＆同化啊！<br> </cc>
+
+
+			</td></tr>
+		</table>
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+		<td class="p14">
+
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+
+		<td align="left" class="au">
+		<div class="uau anonym">作者：123.53.145.*</div>
+
+		<div class="uau">
+
+
+		<span class="gray12 c_time">2009-5-4 12:49</span>
+
+		<a href="#sub" class=t onclick="Post.reply('13');">回复此发言</a>&nbsp;
+
+
+		</div>
+		</td>
+	</tr>
+
+	<tr><td></td><td><hr class="fenge" align="left" width="87%" size="1"></td></tr>
+</table>
+
+<a name="#14"></a>
+<table width="72%" border="0" bgcolor="#FFFFFF">
+	<tr>
+		<td height="17" align="center" width="3%" class="gray">14</td>
+		<td class="p14" align="left" >
+		<a name="5948938175"></a>
+
+		<font color="#0000cc">回复：[转帖]夜乐之月&lt;关于嵇康和长乐亭主&gt;作者：徐若樱 </font>
+
+		</td>
+	</tr>
+	<tr><td></td>
+		<td align=left width="97%">
+		<table class="wr" border="0" cellspacing="0" cellpadding="0">
+			<tr><td class="gray14"> 
+
+
+			<cc>再向若樱申请转贴到抽屉吧，是否可以？谢谢。^_^</cc>
+
+
+			</td></tr>
+		</table>
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+		<td class="p14">
+
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+
+		<td align="left" class="au" id="autonym" name="autonym" userid="5cb7b3e9ccebd7d01400">
+		<div class="uname">作者：<a href="http://hi.baidu.com/sys/checkuser/%B3%E9%CC%EB%D7%D0/3" target=_blank>抽屉仔</a></div>
+		<div class="youa"><a href="" target="_blank" class="youa_shop"></a></div>
+		<div class="im"><a href="#" onclick="UserIcon.chat('抽屉仔');return false;" class="msg"></a></div>
+
+		<div class="uau">
+
+
+		<span class="gray12 c_time">2009-5-9 19:53</span>
+
+		<a href="#sub" class=t onclick="Post.reply('14');">回复此发言</a>&nbsp;
+
+
+		</div>
+		</td>
+	</tr>
+
+	<tr><td></td><td><hr class="fenge" align="left" width="87%" size="1"></td></tr>
+</table>
+
+<a name="#15"></a>
+<table width="72%" border="0" bgcolor="#FFFFFF">
+	<tr>
+		<td height="17" align="center" width="3%" class="gray">15</td>
+		<td class="p14" align="left" >
+		<a name="5972177259"></a>
+
+		<font color="#0000cc">回复：[转帖]夜乐之月&lt;关于嵇康和长乐亭主&gt;作者：徐若樱 </font>
+
+		</td>
+	</tr>
+	<tr><td></td>
+		<td align=left width="97%">
+		<table class="wr" border="0" cellspacing="0" cellpadding="0">
+			<tr><td class="gray14"> 
+
+
+			<cc>晕，当然可以，飞扑亲，反正偶写文的唯一动力就是勾搭抽亲～～</cc>
+
+
+			</td></tr>
+		</table>
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+		<td class="p14">
+
+		</td>
+	</tr>
+	<tr><td height="17"></td>
+
+		<td align="left" class="au">
+		<div class="uau anonym">作者：123.53.145.*</div>
+
+		<div class="uau">
+
+
+		<span class="gray12 c_time">2009-5-14 12:44</span>
+
+		<a href="#sub" class=t onclick="Post.reply('15');">回复此发言</a>&nbsp;
+
+
+		</div>
+		</td>
+	</tr>
+
+	<tr><td></td><td><hr class="fenge" align="left" width="87%" size="1"></td></tr>
+</table>
+
+
+<table width="72%"  border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td class="pg" style="padding:5px 0 5px 30px;">共有<font color="#ff0000">15</font>篇贴子 &nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+</table>
+<!--**** End 贴子列表**** -->
+
+<div id="editor" >
+	<h2 id="editor_title">发表回复</h2>
+	<form id="post" name="post" action="/f" method="post" onsubmit="Post.add.submit();return false;">
+	<input type="hidden" name="ct" id="ct" value="385875968" />
+	<input type="hidden" name="tn" id="tn" value="ajaxThreadSubmit"/>
+	<input type="hidden" name="word" id="word" value="嵇康"/>
+	<input type="hidden" name="lm" id="lm" value="387494" />
+	<input type="hidden" name="z" id="z" value="560524883" />
+	<input type="hidden" name="sc" id="sc" value="15" />
+	<input type="hidden" name="cm" id="cm" value="0" />
+	<input type="hidden" name="rn" id="rn" value="3609782594" />
+	<input type="hidden" name="bs" id="bs" value="" />
+	<input type="hidden" name="str2" id="str2" value="" />
+	<input type="hidden" name="rs3" id="rs3" value="0" />
+	<input type="hidden" name="str3" id="str3" value="BAE1CE5FB8F9755C0629849D2C26DA82" />
+	<input type="hidden" name="str4" id="str4" value="4231675663508247866" />
+	<input type="hidden" name="str1" id="str1" value="" />
+	<input type="hidden" name="rs4" id="rs4" value="1" />
+	<input type="hidden" name="ti" id="ti" value="回复：[转帖]夜乐之月&lt;关于嵇康和长乐亭主&gt;作者：徐若樱 " />
+	<input type="hidden" name="code" id="code" value="1" />
+	
+	<table width="100%" border="0" cellspacing="1" cellpadding="3">
+		<tbody>
+		<tr>
+			<td colspan="3" style="color:#ff0000;font-weight:bold;" id="editor_banned"></td><!--不能发贴时的提示-->
+		</tr>
+		<tr><!--广告-->
+			<td width="50px" valign="top" nowrap></td>
+			<td></td>
+			<td width="180px" rowspan="4" valign="top">
+			<div id="Tads" style="display:none"></div>
+<script type="text/javascript">
+(function(){
+	if((screen.width>800 && screen.height>600) && (15>=6)){
+	  document.getElementById("Tads").style.display="";
+	}else{
+	  document.getElementById("Tads").style.display="none";
+	}
+})();
+</script>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top" nowrap >内　容:</td>
+			<td>
+			<!--滚轴广告_修改开始-->
+			<div id="ec_ad_co" style="margin:0;padding:0;height:226px;">
+
+<div id="editorInput">
+	<div id="bdeErrorShower" style="display:none;">抱歉，发贴框加载失败，建议您<a href='javascript:void(0)' onclick='window.location.reload()'>刷新页面</a>重试。</div>
+	<div id="bdeLoadTip" style="display:none;">发贴框正在加载，请稍候...</div>
+	<div id="bdeTextPanel"  style="display:none;">
+		<div id="bdeUneditToolbar"></div>
+		<div id="bdeUneditArea"></div>
+
+		<div id="bdeTextTool">
+			<a href="#" title="插入图片" onmouseup="this.className='bdeToolUp'" onmouseout="this.className='bdeToolOut'" onmouseover="this.className='bdeToolOver'" onmousedown="this.className='bdeToolDown'" id="bdeImageTool" onfocus="this.blur()" onclick="BdeText.doImage();return false"><div></div></a>
+			<a href="#" title="插入视频" onmouseup="this.className='bdeToolUp'" onmouseout="this.className='bdeToolOut'" onmouseover="this.className='bdeToolOver'" onmousedown="this.className='bdeToolDown'" id="bdeFlashTool" onfocus="this.blur()" onclick="BdeText.doFlash();return false"><div></div></a>
+			<a href="#" title="插入表情" onmouseup="this.className='bdeToolUp'" onmouseout="this.className='bdeToolOut'" onmouseover="this.className='bdeToolOver'" onmousedown="this.className='bdeToolDown'" id="bdeSmileyTool" onfocus="this.blur()" onclick="BdeText.doSmiley();return false"><div></div></a>
+			<div style="clear:both"></div>
+		</div>
+        <div id="bdeTextArea"></div>
+	</div>
+	<div id="textInputPanel" style="display:none;">
+		<textarea id="textInput"></textarea>
+		<div id="bdeTextInputInfo">&nbsp;因发贴框加载失败，已自动转换为简化发贴框，只支持发表文字。<br>&nbsp;您可以尝试重新<a href='javascript:void(0)' onclick='window.location.reload()'>刷新页面</a>加载。</div>
+	</div>
+</div>
+
+                
+				<span id="ec_ad"></span>
+			</div>
+			<div id="coError" style="clear:both;" class="postError"></div>
+<script type="text/javascript">
+	var arrBaiduAds = new Array();
+	function BaiduAdsDisplay(index){
+		if(typeof(arrBaiduAds[index])=="undefined" || arrBaiduAds[index]=="") return;
+		document.write(arrBaiduAds[index]);
+	}
+</script>
+<script src="http://a.baidu.com/ecom?di=191&tm=baidurightbar1static&tn=baidu_191&word=%EF%FA%BF%B5"></script>
+<script type="text/javascript">
+BaiduAdsDisplay(191);
+if(15<6){
+	document.getElementById("ec_ad").style.display="none";
+}
+</script>
+			<!--滚轴广告_修改结束-->
+			</td>
+		</tr>
+		<tr>
+      <td style="padding-top:5px" valign="top" nowrap >用户名:</td>
+      <td style="padding-top:5px">
+
+			<span id="login_reg"></span><!--未登录用户的提示-->
+
+			</td>
+		</tr>
+		
+		<tr id="captcha_container" style="display:none;">
+			<td nowrap="nowrap" valign="top"><label for="captcha" style="line-height:24px;">验证码:</label></td>
+			<td valign="middle" align="left" colspan="2" nowrap="nowrap">
+			<div>
+			<input onblur="Captcha.reset();" onfocus="Captcha.init();" id="captcha" autocomplete="off" size="10" maxlength="10">
+			请点击后输入验证码，字母不区分大小写
+			</div>
+			<div id="captcha_content" style="display:none;"></div>
+			<div id="captcha_error" class="postError"></div></div>
+			</td>
+		</tr>
+		
+		<tr><td></td>
+			<td>
+			<a name="sub"></a>
+			<input type="submit" name="add_post_submit" id="add_post_submit" value="发表贴子" />&nbsp;&nbsp;
+			</td><td></td>
+		</tr>
+		
+		<tr align="left"><td valign="top" colspan="3"></td></tr>
+		</tbody>
+	</table>
+	</form>
+<script src="http://static.tieba.baidu.com/tb/editor/contentinput.js?v=20090811112651" type="text/javascript"></script>
+<script type="text/javascript">
+/***** 初始化新版发帖框 **/
+(function(){ 
+	PostEditor.init("1");//初始化富编辑器
+	
+
+	PostEditor.is_login=PageData["is_login"];
+	PostEditor.need_captcha=PageData["need_captcha"];
+	Fe.G("add_post_submit").disabled = false;
+	
+	/***初始化验证码****/
+	Captcha.forum_id=PageData["forum_id"];
+	Captcha.forum_name_u=PageData["forum_name_u"];
+
+	/*** 初始化str2的值 ****/
+	
+	
+	
+	
+
+	
+
+	PostEditor.showLoginAndReg();//匿名用户，登录注册链接
+
+})();
+</script>
+</div>
+
+
+
+
+
+
+
+	
+
+
+<style>
+#ft{clear:both;line-height:20px;background:#E6E6E6;text-align:center}
+#ft,#ft *{color:#77C;font-size:12px;font-family:Arial;white-space:nowrap}
+#ft .c{color:#7777CC;font-family:arial;}
+#ft a.c{color:#7777CC;}
+#ft a.c:visited{color:#7777CC;}
+</style>
+<div id="ft">&copy;2009 Baidu <a href="http://static.tieba.baidu.com/tb/eula.html" class="c" style="font-family:arial;">贴吧协议</a></div>
+
+
+
+
+<!-- Begin Cpro Ad -->
+<script language="javascript">
+var cpro_maxnum=0;
+if (document.images) {
+	var img = new Image();
+	window["bd_pv_" + (new Date().getTime())] = img;
+	img.src ="http://static.tieba.baidu.com/tb/img/pv.gif"+"?area=pbCproBegin" + "&t=" + new Date().getTime();
+	img=null;
+}
+</script>
+<script src="http://cpro.baidu.com/cpro/ui/post.js"></script>
+<script src="http://static.tieba.baidu.com/tb/cpro_num.js"></script>
+<script language="javascript">
+var arrBaiduCproConfig=new Array();
+arrBaiduCproConfig['n'] = 'baidupost_cpr';
+arrBaiduCproConfig['tm'] = 24;
+arrBaiduCproConfig['cm'] = 60;
+arrBaiduCproConfig['um'] = 24;
+arrBaiduCproConfig['rad'] = 1;
+arrBaiduCproConfig['cad'] = 1;
+arrBaiduCproConfig['wn'] = 1;
+arrBaiduCproConfig['bg'] = '#ffffff';
+arrBaiduCproConfig['tt'] = '#000000';
+arrBaiduCproConfig['ct'] = '#000000';
+arrBaiduCproConfig['url'] = '#000000';
+arrBaiduCproConfig['ta'] = 'right';
+arrBaiduCproConfig['tl'] = 'top';
+arrBaiduCproConfig['tn'] = 'baiduCPROiknow';
+function getDefineY(ObjectID) {
+    var iPositionY=ObjectID.offsetTop;
+    while(ObjectID=ObjectID.offsetParent) {
+        iPositionY+=ObjectID.offsetTop;
+    }
+    return iPositionY;
+}
+
+function calcCproNumber(){
+	var rightAd=document.getElementById("rightAd");
+	var cproshow=document.getElementById("cproshow");
+    maAdTop = getDefineY(rightAd);
+    cpAdTop = getDefineY(cproshow);
+    maAdNo = parseInt((cpAdTop - maAdTop)/75,10);
+    cpAdNo1 = 10 - maAdNo;
+    cpTopSpace = cpAdTop + 80;
+    var ft=document.getElementById("ft");
+    ftTop = getDefineY(ft);
+    cpAdNo2 = parseInt((ftTop-cpTopSpace)/90,10);
+    cpNum = cpAdNo1>=cpAdNo2?cpAdNo2:cpAdNo1;
+    cpNum = parseInt(cpNum, 10);
+    arrBaiduCproConfig['hn'] = cpNum;
+    if(cpNum>0){
+        scr = document.createElement('script');
+        scr.src = f_u('');
+        document.body.appendChild(scr);
+    }
+}
+
+if(typeof(calcCproNumber)=='function'){ 
+	calcCproNumber();
+	if (document.images) {
+		var img = new Image();
+		window["bd_pv_" + (new Date().getTime())] = img;
+		img.src ="http://static.tieba.baidu.com/tb/img/pv.gif"+"?area=pbCproEnd" + "&t=" + new Date().getTime();
+		img=null;
+	}
+}
+</script>
+<!-- End Cpro Ad -->
+
+
+<script type="text/javascript">
+/** 获取PDC数据并更新Hi和有啊Icon，每次获取25个**/
+(function(){
+	UserIcon.login_user=PageData.user_name;
+	var user_id=Fe.Array.unique(PageData["pdc_friend_sign"].split(","));
+	var user_num=user_id.length;
+	if(user_num>25){
+		OldPbUserIcon.requestPdcData(user_id.slice(0,25).join(","),"OldPbUserIcon.showHiAndYoua");
+		OldPbUserIcon.requestPdcData(user_id.slice(25).join(","),"OldPbUserIcon.showHiAndYoua");
+	}
+	else OldPbUserIcon.requestPdcData(user_id.join(","),"OldPbUserIcon.showHiAndYoua");
+})();
+/****/
+</script>
+<script type="text/javascript">
+// out link count
+NsLogLinker.bind(110);
+</script>
+</body>
+</html>
